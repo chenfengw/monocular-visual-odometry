@@ -1,0 +1,2 @@
+python runSIFT.py --input /datasets/cs252-sp21-A00-public/dataset_SfM/sequences/00/image_0/
+python runFeature.py
