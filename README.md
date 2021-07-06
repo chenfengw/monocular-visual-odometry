@@ -34,12 +34,6 @@ python runFeature.py
 The final vehicle trajectory look like this
 ![](images/path.png)
 
-## Results
-Our algorithm achieves the following performance on [KITTI dataset](http://www.cvlibs.net/datasets/kitti/raw_data.php) (tested on sequence 00):
-Mean Rotation Error| Mean Translation Error
-:--:|:--:
-0.00277 |0.53721
-
 ## Reference
 1. pyviso2, libviso2 python wrapper: https://github.com/jlowenz/pyviso2
 2. http://www.cvlibs.net/software/libviso/
