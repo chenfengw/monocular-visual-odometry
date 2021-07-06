@@ -1,4 +1,4 @@
-import glob
+import os
 import cv2
 import numpy as np
 import os.path as osp
@@ -14,6 +14,7 @@ parser.add_argument('--last_frame', type=int, default=300,
         help='Image Id of last frame, default value=300' )
 opt = parser.parse_args()
 print(opt)
+os.makedirs("SIFT", exist_ok=True)
 
 for n in range(opt.first_frame, opt.last_frame ):
     imName = osp.join(opt.input, '%06d.png' % n)
@@ -34,4 +35,4 @@ for n in range(opt.first_frame, opt.last_frame ):
     pfeatures = np.concatenate([points, features], axis=1)
 
     newName = imName.split('/')[-1].replace('.png', '_feature.npy')
-    np.save(newName, pfeatures)
+    np.save(os.path.join("SIFT",newName), pfeatures)
