@@ -1,7 +1,7 @@
 # Monocular Camera Visual Odometry
+This repository contains code for monocular camera visual odometry using [libviso2](http://www.cvlibs.net/software/libviso/). Features extracted using [SIFT](https://docs.opencv.org/master/da/df5/tutorial_py_sift_intro.html), evaluated on the [KITTI dataset](http://www.cvlibs.net/datasets/kitti/raw_data.php).
 
-This repository contains code for monocular camera visual odometry using [libviso2](http://www.cvlibs.net/software/libviso/). Evaluated on the KITTI dataset.
-
+![](images/optimized2.gif)
 ## Requirements
 To install requirements:
 ```setup
