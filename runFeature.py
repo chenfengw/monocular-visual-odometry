@@ -19,7 +19,7 @@ def errorMetric(RPred, RGt, TPred, TGt):
         TGt (np array): translation ground truth. shape = (3,1)
 
     Returns:
-        tuple: (errorRot(float), errorTrans(float))
+        tuple: (errorRot: float, errorTrans: float)
     """
     diffRot = (RPred - RGt)
     diffTrans = (TPred - TGt)
@@ -30,7 +30,8 @@ def errorMetric(RPred, RGt, TPred, TGt):
 
 
 def runSFM(dataset_path, feature_dir):
-    """Run SFM using libviso for monocular camera
+    """Run SFM using libviso for monocular camera. Output will
+    be saved in ./vis_preFeature
 
     Args:
         dataset_path (str): path of dataset. monu
@@ -165,7 +166,6 @@ def runSFM(dataset_path, feature_dir):
                 ax2.plot([gtTr[k-2][0, 3], gtTr[k-1][0, 3]], \
                     [gtTr[k-2][2, 3], gtTr[k-1][2, 3]], 'r.-', linewidth=1)
             ax2.set_title('Blue: estimated trajectory; Red: ground truth trejectory')
-
             plt.draw()
 
         # Compute rotation
