@@ -30,6 +30,12 @@ def errorMetric(RPred, RGt, TPred, TGt):
 
 
 def runSFM(dataset_path, feature_dir):
+    """Run SFM using libviso for monocular camera
+
+    Args:
+        dataset_path (str): path of dataset. monu
+        feature_dir (str): dir of features. ie. "SIFT"
+    """
     if_vis = True # set to True to do the visualization per frame; the images will be saved at '.vis/'. Turn off if you just want the camera poses and errors
     if_on_screen = False # if True the visualization per frame is going to be displayed realtime on screen; if False there will be no display, but in both options the images will be saved
 
@@ -180,20 +186,13 @@ def runSFM(dataset_path, feature_dir):
 
         # Compute errors
         errorRot, errorTrans = errorMetric(Rpred, Rgt, Tpred, Tgt)
-        if frame == 20:
-            print(f"Rpred type is {type(Rpred)}, shape is {Rpred.shape}")
-            print(f"Rgt type is {type(Rgt)}, length is {Rgt.shape}")
-            print(f"Tpred type is {type(Tpred)}, length is {Tpred.shape}")
-            print(f"Tgt type is {type(Tgt)}, length is {Tgt.shape}")
-            sys.exit()
-
         errorRotSum = errorRotSum + errorRot
         errorTransSum = errorTransSum + errorTrans
         print('Mean Error Rotation: %.5f'%(errorRotSum / (k-1)))
         print('Mean Error Translation: %.5f'%(errorTransSum / (k-1)))
-
         print('== [Result] Frame: %d, Matches %d, Inliers: %.2f'%(frame, num_matches, 100*num_inliers/(num_matches+1e-8)))
 
+        # display/save plot
         if if_vis:
             # input('Paused; Press Enter to continue') # Option 1: Manually pause and resume
             if if_on_screen:
