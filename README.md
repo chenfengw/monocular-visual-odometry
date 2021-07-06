@@ -1,60 +1,46 @@
 # Monocular Camera Visual Odometry
 
-This repository is the official implementation of [My Paper Title](https://arxiv.org/abs/2030.12345). 
-
->📋  Optional: include a graphic explaining your approach/main result, bibtex entry, link to demos, blog posts and tutorials
+This repository contains code for monocular camera visual odometry using [libviso2](http://www.cvlibs.net/software/libviso/). Evaluated on the KITTI dataset.
 
 ## Requirements
-
 To install requirements:
-
 ```setup
 pip install -r requirements.txt
 ```
+Please also install libviso python wrapper. Follow instruction [here](https://github.com/jlowenz/pyviso2#getting-started).
 
->📋  Describe how to set up the environment, e.g. pip/conda/docker commands, download datasets, etc...
 
-## Training
+## Dataset
+The algorithm is evaluated on the KITTI dataset. You can download sample data to test this repo. 
+- [Data download](https://drive.google.com/file/d/1ec5Fe3p2Sf0j_wV6mE7JVVXXwwZejVZV/view?usp=sharing)
 
-To train the model(s) in the paper, run this command:
+> For the complete dataset, please visit KITTI dataset [website](http://www.cvlibs.net/datasets/kitti/raw_data.php).
+
+## SIFT Features
+To compute SIFT features for each frame, run this command:
 
 ```train
-python train.py --input-data <path_to_data> --alpha 10 --beta 20
+python runSIFT.py --input /path/to/dataset_SfM
+```
+Features extracted by SIFT 
+![](images/sample_frame.png)
+
+## Visual Odometry
+To run visual odometry using [libviso2](http://www.cvlibs.net/software/libviso/), run this command:
+```
+python runFeature.py
 ```
 
->📋  Describe how to train the models, with example commands on how to train the models in your paper, including the full training procedure and appropriate hyperparameters.
-
-## Evaluation
-
-To evaluate my model on ImageNet, run:
-
-```eval
-python eval.py --model-file mymodel.pth --benchmark imagenet
-```
-
->📋  Describe how to evaluate the trained models on benchmarks reported in the paper, give commands that produce the results (section below).
-
-## Pre-trained Models
-
-You can download pretrained models here:
-
-- [My awesome model](https://drive.google.com/mymodel.pth) trained on ImageNet using parameters x,y,z. 
-
->📋  Give a link to where/how the pretrained models can be downloaded and how they were trained (if applicable).  Alternatively you can have an additional column in your results table with a link to the models.
+The final vehicle trajectory look like this
+![](images/path.png)
 
 ## Results
+Our algorithm achieves the following performance on [KITTI dataset](http://www.cvlibs.net/datasets/kitti/raw_data.php) (tested on sequence 00):
+Mean Rotation Error| Mean Translation Error
+:--:|:--:
+0.00277 |0.53721
 
-Our model achieves the following performance on :
-
-### [Image Classification on ImageNet](https://paperswithcode.com/sota/image-classification-on-imagenet)
-
-| Model name         | Top 1 Accuracy  | Top 5 Accuracy |
-| ------------------ |---------------- | -------------- |
-| My awesome model   |     85%         |      95%       |
-
->📋  Include a table of results from your paper, and link back to the leaderboard for clarity and context. If your main result is a figure, include that figure and link to the command or notebook to reproduce it. 
-
-
-## Contributing
-
->📋  Pick a licence and describe how to contribute to your code repository. 
+## Reference
+1. pyviso2, libviso2 python wrapper: https://github.com/jlowenz/pyviso2
+2. http://www.cvlibs.net/software/libviso/
+3. OpenCV SIFT: https://docs.opencv.org/master/da/df5/tutorial_py_sift_intro.html
